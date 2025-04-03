@@ -52,6 +52,10 @@ This project explores Spotify's most streamed songs in 2024 using real-world mus
 🔗 [LinkedIn](https://www.linkedin.com/in/gayathrikota)
 
 ---
+## 🔗 RPubs Presentation
+
+You can view the full interactive report here:  
+👉 [View on RPubs](https://rpubs.com/gayathriiiii_k/1290916)
 
 ## 🔗 RPubs Presentation
 
