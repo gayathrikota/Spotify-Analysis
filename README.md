@@ -1,67 +1,68 @@
-# 🎵 Most Streamed Spotify Songs 2024: Streaming Trends Analysis
+# Most Streamed Spotify Songs 2024: Streaming Trends Analysis
 
-This project explores Spotify's most streamed songs in 2024 using real-world music data and R for data wrangling and visualization.
+This project analyzes Spotify's most streamed songs in 2024 using real-world music data. The analysis was conducted using R, with a focus on data wrangling and visualization.
 
 ---
 
-## 📌 Goals
+## Objectives
+
 - Identify the top 10 most streamed songs
 - Analyze the top 10 most streamed artists
 - Visualize monthly streaming trends
-- Compare collaborations vs solo tracks
+- Compare collaborative versus solo track performance
 
 ---
 
-## 📈 Dataset
+## Dataset
 
 - **Source**: Spotify (2024)  
 - **File**: `Most Streamed Spotify Songs 2024.csv`
 
 ---
 
-## 🛠️ Tools Used
+## Tools and Technologies
 
 - R  
 - tidyverse (dplyr, ggplot2, lubridate)  
 - RMarkdown  
-- Git + GitHub
+- Git & GitHub
 
 ---
 
-## 📊 Key Insights
+## Key Findings
 
-- 🔝 **Top Song**: *MILLION DOLLAR BABY*  
-- 👩‍🎤 **Top Artists**: *Taylor Swift*, *Kendrick Lamar*  
-- 📆 **Peak Months**: March to May  
-- 🤝 **Collaborations** performed better than solo tracks  
-
----
-
-## 📽️ Preview
-
-📂 Explore the full analysis in the `Project.Rmd` file  
-📊 Output slides: `Project.html` or `Project.pdf`
+- **Top Song**: *MILLION DOLLAR BABY*  
+- **Top Artists**: *Taylor Swift*, *Kendrick Lamar*  
+- **Peak Streaming Period**: March to May 2024  
+- **Collaborative songs** had more average streams than solo tracks
 
 ---
 
-## 🙋‍♀️ About Me
+## Project Output
+
+- Full analysis: `Project.Rmd`  
+- Presentation formats: `Project.html` and `Project.pdf`
+
+---
+
+## Author
 
 **Gayathri Kota**  
-🎓 Junior | Data Science Major @ ASU  
-🌐 [Portfolio Website](https://gayathrikota.com)  
-🔗 [LinkedIn](https://www.linkedin.com/in/gayathrikota)
+Junior, Data Science Major  
+Arizona State University  
 
----
-## 🔗 RPubs Presentation
-
-You can view the full interactive report here:  
-👉 [View on RPubs](https://rpubs.com/gayathriiiii_k/1290916)
-
-
+- Portfolio: [gayathrikota.com](https://gayathrikota.com)  
+- LinkedIn: [linkedin.com/in/gayathrikota](https://www.linkedin.com/in/gayathrikota)
 
 ---
 
-## ⭐ Show Some Love
+## RPubs Report
 
-If you like this project, give it a ⭐ and share!  
-Pull requests and suggestions are welcome!
+Access the interactive presentation here:  
+[https://rpubs.com/gayathriiiii_k/1290916](https://rpubs.com/gayathriiiii_k/1290916)
+
+---
+
+## Feedback and Contributions
+
+Feedback and pull requests are welcome.
