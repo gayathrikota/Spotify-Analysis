@@ -1,0 +1,171 @@
+---
+title: 'Most Streamed Spotify Songs 2024: Streaming Trends Analysis'
+author: "Gayathri Kota"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+---
+
+<style type="text/css">
+body p, div, h1, h2, h3, h4, h5 {
+  color: black;
+  font-family: Modern Computer Roman;
+}
+slides > slide.title-slide hgroup h1 {
+  color: #8C1D40;
+}
+h2 {
+  color: #8C1D40;
+}
+</style>
+
+## 🎯 Introduction
+
+This project analyzes the most streamed Spotify songs in 2024.
+
+We explore:
+- Top artists and songs  
+- Temporal streaming trends  
+- Impact of collaborations  
+
+**Dataset Source**: Spotify (2024)  
+**File**: Most Streamed Spotify Songs 2024.csv
+
+
+## 📥 Load and Clean Data
+
+```{r setup, include=FALSE, warning=FALSE, message=FALSE}
+if (!require(tidyverse)) install.packages("tidyverse")
+if (!require(lubridate)) install.packages("lubridate")
+library(tidyverse)
+library(lubridate)
+```
+
+```{r, warning=FALSE, message=FALSE}
+spotify <- read_csv("/Users/gayathrikota/Desktop/DAT 301 Project/Most Streamed Spotify Songs 2024.csv", 
+                    locale = locale(encoding = "latin1"))
+cols_to_clean <- c(
+  'Spotify Streams', 'Spotify Playlist Count', 'Spotify Playlist Reach',
+  'YouTube Views', 'YouTube Likes', 'TikTok Posts', 'TikTok Likes',
+  'TikTok Views', 'YouTube Playlist Reach', 'AirPlay Spins', 'SiriusXM Spins',
+  'Deezer Playlist Reach', 'Pandora Streams', 'Pandora Track Stations',
+  'Soundcloud Streams', 'Shazam Counts'
+)
+char_cols <- spotify %>%
+  select(all_of(cols_to_clean)) %>%
+  select(where(is.character)) %>%
+  colnames()
+spotify <- spotify %>%
+  mutate(across(all_of(char_cols), ~parse_number(.x))) %>%
+  mutate(`Release Date` = mdy(`Release Date`))
+```
+
+
+
+## 🎵 Code: Top 10 Most Streamed Songs
+
+```{r}
+  top_songs <- spotify %>%
+  arrange(desc(`Spotify Streams`)) %>%
+  slice_head(n = 10)
+```
+
+
+
+## 🎵 Chart: Top 10 Most Streamed Songs
+
+```{r, echo=FALSE}
+ggplot(top_songs, aes(x = reorder(Track, `Spotify Streams`), y = `Spotify Streams`)) +
+  geom_bar(stat = "identity", fill = "#2C3E50") +
+  coord_flip() +
+  labs(title = "Top 10 Most Streamed Songs (2024)", x = "Track", y = "Spotify Streams") +
+  theme_minimal()
+```
+
+
+
+## 👩‍🎤 Code: Top 10 Most Streamed Artists
+
+```{r}
+  top_artists <- spotify %>%
+  group_by(Artist) %>%
+  summarise(Total_Streams = sum(`Spotify Streams`, na.rm = TRUE)) %>%
+  arrange(desc(Total_Streams)) %>%
+  slice_head(n = 10)
+```
+
+
+
+## 👩‍🎤 Chart: Top 10 Most Streamed Artists
+
+```{r, echo=FALSE}
+ggplot(top_artists, aes(x = reorder(Artist, Total_Streams), y = Total_Streams)) +
+  geom_bar(stat = "identity", fill = "#4E5D6C") +
+  coord_flip() +
+  labs(title = "Top 10 Most Streamed Artists (2024)", x = "Artist", y = "Total Spotify Streams") +
+  theme_minimal()
+```
+
+
+
+##  Code: Streams by Month
+
+```{r}
+  monthly_streams <- spotify %>%
+  mutate(Month = floor_date(`Release Date`, "month")) %>%
+  group_by(Month) %>%
+  summarise(Total_Streams = sum(`Spotify Streams`, na.rm = TRUE))
+
+```
+
+
+
+##  Chart: Streams by Month
+
+```{r, echo=FALSE}
+ggplot(monthly_streams, aes(x = Month, y = Total_Streams)) +
+  geom_line(linewidth = 1.2, color = "#2E86AB") +
+  geom_point(color = "#555555") +
+  labs(title = "Total Spotify Streams by Month (2024)", x = "Month", y = "Total Streams") +
+  theme_minimal()
+```
+
+
+
+##  Code: Collabs vs Non-Collabs
+
+```{r}
+collab_keywords <- c("feat", "ft", "&")
+spotify <- spotify %>%
+  mutate(Collaboration = str_detect(tolower(Track), paste(collab_keywords, collapse = "|")))
+
+collab_stats <- spotify %>%
+  group_by(Collaboration) %>%
+  summarise(Average_Streams = mean(`Spotify Streams`, na.rm = TRUE))
+```
+
+
+
+##  Chart: Collabs vs Non-Collabs
+
+```{r, echo=FALSE}
+ggplot(collab_stats, aes(x = Collaboration, y = Average_Streams, fill = Collaboration)) +
+  geom_col() +
+  scale_fill_manual(values = c("TRUE" = "#1F77B4", "FALSE" = "#FF7F0E")) +
+  labs(title = "Average Streams: Collaborations vs Non-Collaborations", x = "Is Collaboration?", y = "Average Spotify Streams") +
+  theme(legend.position = "none") +
+  theme_minimal()
+```
+
+
+## 📌 Conclusion
+
+- Top songs include **MILLION DOLLAR BABY**, and top artists like **Taylor Swift**, **Kendrick Lamar**  
+- Streaming was highest between **March–May**  
+- **Collaborations** received more streams than solo songs  
+- I practiced **real data cleaning and visualization** using R  
+
+This project gave me insights into music trends using data science!
+
+
+
